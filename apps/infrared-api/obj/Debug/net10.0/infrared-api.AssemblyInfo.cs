@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("infrared-api")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ffa23fa4a135b557b60e85102c95d8469750ef05")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c32bedce0b661e14b62a847211d373106303ebd1")]
 [assembly: System.Reflection.AssemblyProductAttribute("infrared-api")]
 [assembly: System.Reflection.AssemblyTitleAttribute("infrared-api")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
