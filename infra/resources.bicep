@@ -209,7 +209,7 @@ resource staticWebApp 'Microsoft.Web/staticSites@2022-09-01' = {
   sku: { name: 'Free' }
   properties: {
     repositoryUrl: githubRepoUrl
-    branch: 'main'
+    branch: 'master'
     repositoryToken: githubRepoToken
     buildProperties: {
       appLocation: '/apps/infrared-web'
