@@ -1,0 +1,6 @@
+@infrared_api_HostAddress = http://localhost:5134
+
+GET {{infrared_api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
