@@ -81,6 +81,7 @@ jobs:
         uses: azure/arm-deploy@v2
         with:
           scope: subscription
+          region: ${{ env.LOCATION }}
           template: ./infra/main.bicep
           parameters: >-
             -appName ${{ env.APP_NAME }}
@@ -91,6 +92,7 @@ jobs:
         uses: azure/arm-deploy@v2
         with:
           scope: resourcegroup
+          region: ${{ env.LOCATION }}
           resourceGroupName: rg-infrared
           template: ./infra/resources.bicep
           parameters: './infra/resources.bicepparam'
