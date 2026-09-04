@@ -88,11 +88,11 @@ jobs:
       - name: Deploy Resources Bicep
         uses: azure/arm-deploy@v2
         with:
-          scope: subscription
+          scope: resourceGroup
           region: southcentralus
           template: ./infra/resources.bicep
           parameters: './infra/resources.bicepparam'
-          additionalParameters: >-
+          additionalArguments: >-
             -ghcrUsername ${{ github.actor }}
             -ghcrPassword ${{ secrets.GHCR_TOKEN }}
             -sqlAdminLogin ${{ secrets.SQL_ADMIN_LOGIN }}
