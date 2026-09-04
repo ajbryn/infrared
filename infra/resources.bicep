@@ -204,7 +204,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 // ─── Static Web App (Frontend) ───
 resource staticWebApp 'Microsoft.Web/staticSites@2022-09-01' = {
   name: 'swa-${appName}'
-  location: location
+  location: 'centralus' //can't use location param because per Azure, "List of available regions for the resource type is 'centralus,eastus2,westus2,westeurope,eastasia'."
   sku: { name: 'Free' }
   properties: {
     repositoryUrl: githubRepoUrl
