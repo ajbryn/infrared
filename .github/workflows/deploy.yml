@@ -83,16 +83,22 @@ jobs:
           scope: subscription
           region: southcentralus
           template: ./infra/main.bicep
-          parameters: './infra/main.bicepparam'
+          parameters:  >-
+            -appName infrared
+            -location southcentralus
+            
 
       - name: Deploy Resources Bicep
         uses: azure/arm-deploy@v2
         with:
           scope: resourcegroup
+          resourceGroupName: rg-infrared
           region: southcentralus
           template: ./infra/resources.bicep
           parameters: './infra/resources.bicepparam'
           additionalArguments: >-
+            -appName infrared
+            -location southcentralus
             -ghcrUsername ${{ github.actor }}
             -ghcrPassword ${{ secrets.GHCR_TOKEN }}
             -sqlAdminLogin ${{ secrets.SQL_ADMIN_LOGIN }}
