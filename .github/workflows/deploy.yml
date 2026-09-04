@@ -78,35 +78,30 @@ jobs:
       #     creds: ${{ secrets.AZURE_CREDENTIALS }}
 
       - name: Deploy Main (ResourceGroup) Bicep
-        uses: azure/arm-deploy@v2
+        uses: azure/bicep-deploy@v2
         with:
-          scope: subscription
-          region: ${{ env.LOCATION }}
+          type: subscription
+          location: ${{ env.LOCATION }}
           template: ./infra/main.bicep
           parameters: |
-            {
-              "appName": "${{ env.APP_NAME }}",
-              "location": "${{ env.LOCATION }}"
-            }
-            
+            appName: ${{ env.APP_NAME }}
+            location: ${{ env.LOCATION }}
 
       - name: Deploy Resources Bicep
-        uses: azure/arm-deploy@v2
+        uses: azure/bicep-deploy@v2
         with:
-          scope: resourcegroup
-          region: ${{ env.LOCATION }}
-          resourceGroupName: rg-infrared
-          template: ./infra/resources.bicep
-          parameters-file: './infra/resources.bicepparam'
+          type: resourcegroup
+          location: ${{ env.LOCATION }}
+          resource-group: rg-infrared
+          template-file: ./infra/resources.bicep
+          parameters-file: ./infra/resources.bicepparam
           parameters: |
-            {
-              "appName": "${{ env.APP_NAME }}",
-              "location": "${{ env.LOCATION }}",
-              "ghcrUsername": "${{ github.actor }}",
-              "ghcrPassword": "${{ secrets.GHCR_TOKEN }}",
-              "sqlAdminLogin": "${{ secrets.SQL_ADMIN_LOGIN }}",
-              "sqlAdminPassword": "${{ secrets.SQL_ADMIN_PASSWORD }}",
-            }
+            appName: ${{ env.APP_NAME }}
+            location: ${{ env.LOCATION }}
+            ghcrUsername: ${{ github.actor }}
+            ghcrPassword: ${{ secrets.GHCR_TOKEN }}
+            sqlAdminLogin: ${{ secrets.SQL_ADMIN_LOGIN }}
+            sqlAdminPassword: ${{ secrets.SQL_ADMIN_PASSWORD }}
 
   deploy-frontend:
     runs-on: ubuntu-latest
