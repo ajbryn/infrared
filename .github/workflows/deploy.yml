@@ -88,7 +88,7 @@ jobs:
       - name: Deploy Resources Bicep
         uses: azure/arm-deploy@v2
         with:
-          scope: resourceGroup
+          scope: resourcegroup
           region: southcentralus
           template: ./infra/resources.bicep
           parameters: './infra/resources.bicepparam'
