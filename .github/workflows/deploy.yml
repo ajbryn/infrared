@@ -83,7 +83,7 @@ jobs:
           scope: subscription
           region: southcentralus
           template: ./infra/main.bicep
-          parameters: '../../infra/main.bicepparam'
+          parameters: './infra/main.bicepparam'
 
       - name: Deploy Resources Bicep
         uses: azure/arm-deploy@v2
@@ -91,7 +91,7 @@ jobs:
           scope: subscription
           region: southcentralus
           template: ./infra/resources.bicep
-          parameters: '../../infra/resources.bicepparam'
+          parameters: './infra/resources.bicepparam'
           additionalParameters: >-
             -ghcrUsername ${{ github.actor }}
             -ghcrPassword ${{ secrets.GHCR_TOKEN }}
