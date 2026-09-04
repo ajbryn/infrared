@@ -81,6 +81,7 @@ jobs:
         uses: azure/arm-deploy@v2
         with:
           scope: subscription
+          region: southcentralus
           template: ./infra/main.bicep
           parameters: |
             appName=${{ env.APP_NAME }}

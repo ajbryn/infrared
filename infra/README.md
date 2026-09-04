@@ -36,13 +36,20 @@ az ad app federated-credential create `
 
 The _subject_ must match how the workflow is triggered:
 
+> ! If repo was created after July 15, 2026, GitHub issues tokens with the new immutable subject format that embeds numeric owner and repo IDs
+> e.g., repo:YOUR-ORG@012345678/YOUR-REPO@0123456789
+> find it at https://github.com/YOUR-ORG/YOUR-REPO/settings/actions/oidc-configuration 
+
+repo:ajbryn@115934368/infrared@1355305578
+
 | Trigger | Subject |
 |--|--|
-| Push to main | repo:org/repo:ref:refs/heads/main |
-| Push to master | repo:org/repo:ref:refs/heads/master |
-| Any branch | repo:org/repo:ref_type:branch |
-| Tag v* | repo:org/repo:ref_type:tag |
-| GitHub Environment | repo:org/repo:environment:production |
+| Push to main | repo:YOUR-ORG@012345678/YOUR-REPO@0123456789:ref:refs/heads/main |
+| Push to master | repo:YOUR-ORG@012345678/YOUR-REPO@0123456789:ref:refs/heads/master |
+| Any branch | repo:YOUR-ORG@012345678/YOUR-REPO@0123456789:ref_type:branch |
+| Tag v* | repo:YOUR-ORG@012345678/YOUR-REPO@0123456789:ref_type:tag |
+| GitHub Environment | repo:YOUR-ORG@012345678/YOUR-REPO@0123456789:environment:production |
+
 
 ## 4. Assign a Role (least privilege)
 ```ps
@@ -72,7 +79,7 @@ Go to Settings → Secrets and variables → Actions and add:
 
 | Name | Value |
 |--|--|
-| AZURE_CLIENT_ID | The app's client ID (Output from step 1 above) |
+| AZURE_CLIENT_ID | The app's client ID (this is not the client-id output from step 1 above, but use that id in this ps command to get the app's client ID `az ad app show --id <client-id> --query displayName -o tsv`) |
 | AZURE_TENANT_ID | Your Entra tenant ID (`az account show --query tenantId --output tsv`) |
 | AZURE_SUBSCRIPTION_ID | Target subscription ID (`az account show --query id --output tsv`) |
 
