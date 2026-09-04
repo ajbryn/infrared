@@ -45,12 +45,20 @@ param sqlAdminPassword string
 // }
 
 
+resource logAnalytics 'Microsoft.OperationalInsights/workspaces@2022-10-01' = {
+  name: 'log-${appName}'
+  location: location
+  properties: {
+    sku: { name: 'PerGB2018' }
+  }
+}
+
 
 // SQL Database - free
 
 resource sqlServer 'Microsoft.Sql/servers@2025-01-01' = {
   name: 'sql-${appName}'
-  location: location
+  location: 'centralus' //can't use location param because per Azure, "List of available regions for the resource type is 'centralus,eastus2,westus2,westeurope,eastasia'."
   properties: {
     administratorLogin: sqlAdminLogin
     administratorLoginPassword: sqlAdminPassword
@@ -61,7 +69,7 @@ resource sqlServer 'Microsoft.Sql/servers@2025-01-01' = {
 resource sqlDb 'Microsoft.Sql/servers/databases@2025-01-01' = {
   parent: sqlServer
   name: 'myFreeDb'
-  location: location
+  location: 'centralus' //can't use location param because per Azure, "List of available regions for the resource type is 'centralus,eastus2,westus2,westeurope,eastasia'."
   sku: {
     name: 'GP_S_Gen5'
     tier: 'GeneralPurpose'
@@ -132,14 +140,6 @@ resource containerEnv 'Microsoft.App/managedEnvironments@2024-03-01' = {
         customerId: logAnalytics.id
       }
     }
-  }
-}
-
-resource logAnalytics 'Microsoft.OperationalInsights/workspaces@2022-10-01' = {
-  name: 'log-${appName}'
-  location: location
-  properties: {
-    sku: { name: 'PerGB2018' }
   }
 }
 
