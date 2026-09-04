@@ -1,4 +1,4 @@
 using './main.bicep'
 
-param appName = 'infrared'
+param appName = 'myapp'
 param location = 'southcentralus' 

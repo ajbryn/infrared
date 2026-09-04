@@ -8,7 +8,7 @@ permissions:
   contents: read
 
 env:
-  APP_NAME: myapp
+  APP_NAME: infrared
   LOCATION: southcentralus
   GHCR_REGISTRY: ghcr.io
 
@@ -84,8 +84,8 @@ jobs:
           region: ${{ env.LOCATION }}
           template: ./infra/main.bicep
           parameters: >-
-            -appName ${{ env.APP_NAME }}
-            -location ${{ env.LOCATION }}
+            appName=${{ env.APP_NAME }}
+            location=${{ env.LOCATION }}
             
 
       - name: Deploy Resources Bicep
