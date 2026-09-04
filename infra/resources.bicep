@@ -26,6 +26,10 @@ param githubRepoUrl string
 @secure()
 param githubRepoToken string
 
+param sqlAdminLogin string
+
+@secure()
+param sqlAdminPassword string
 
 
 // // ─── Key Vault ─── 3 cents per 10,000 operations
@@ -43,11 +47,6 @@ param githubRepoToken string
 
 
 // SQL Database - free
-
-@secure()
-param sqlAdminLogin string
-@secure()
-param sqlAdminPassword string
 
 resource sqlServer 'Microsoft.Sql/servers@2025-01-01' = {
   name: 'sql-${appName}'

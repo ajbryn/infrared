@@ -77,21 +77,26 @@ jobs:
       #   with:
       #     creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      - name: Deploy Bicep
+      - name: Deploy Main (ResourceGroup) Bicep
         uses: azure/arm-deploy@v2
         with:
           scope: subscription
           region: southcentralus
           template: ./infra/main.bicep
-          parameters: |
-            appName=${{ env.APP_NAME }}
-            location=${{ env.LOCATION }}
-            backendImage=${{ env.GHCR_REGISTRY }}/${{ github.repository }}/backend:${{ needs.build-push-backend.outputs.image-tag }}
-            ghcrUsername=${{ github.actor }}
-            ghcrPassword=${{ secrets.GHCR_TOKEN }}
-            sqlAdminPassword=${{ secrets.SQL_ADMIN_PASSWORD }}
-            githubRepoUrl=https://github.com/${{ github.repository }}
-            githubRepoToken=${{ secrets.GITHUB_TOKEN }}
+          parameters: '../../infra/main.bicepparam'
+
+      - name: Deploy Resources Bicep
+        uses: azure/arm-deploy@v2
+        with:
+          scope: subscription
+          region: southcentralus
+          template: ./infra/resources.bicep
+          parameters: '../../infra/resources.bicepparam'
+          additionalParameters: >-
+            -ghcrUsername ${{ github.actor }}
+            -ghcrPassword ${{ secrets.GHCR_TOKEN }}
+            -sqlAdminLogin ${{ secrets.SQL_ADMIN_LOGIN }}
+            -sqlAdminPassword ${{ secrets.SQL_ADMIN_PASSWORD }}
 
   deploy-frontend:
     runs-on: ubuntu-latest
