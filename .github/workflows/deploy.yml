@@ -80,7 +80,9 @@ jobs:
       - name: Deploy Main (ResourceGroup) Bicep
         uses: azure/bicep-deploy@v2
         with:
-          type: subscription
+          type: deployment
+          operation: create
+          scope: subscription
           location: ${{ env.LOCATION }}
           template: ./infra/main.bicep
           parameters: |
@@ -90,7 +92,9 @@ jobs:
       - name: Deploy Resources Bicep
         uses: azure/bicep-deploy@v2
         with:
-          type: resourcegroup
+          type: deployment
+          operation: create
+          scope: resourcegroup
           location: ${{ env.LOCATION }}
           resource-group: rg-infrared
           template-file: ./infra/resources.bicep
