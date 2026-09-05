@@ -80,6 +80,7 @@ jobs:
       - name: Deploy Main (ResourceGroup) Bicep
         uses: azure/bicep-deploy@v2
         with:
+          name: bicep-deploy-rg-centralus 
           type: deployment
           operation: create
           scope: subscription
@@ -93,6 +94,7 @@ jobs:
       - name: Deploy Resources Bicep
         uses: azure/bicep-deploy@v2
         with:
+          name: bicep-deploy-centralus 
           type: deployment
           operation: create
           scope: resourceGroup
