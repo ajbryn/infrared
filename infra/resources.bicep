@@ -84,7 +84,7 @@ resource sqlDb 'Microsoft.Sql/servers/databases@2025-01-01' = {
     readScale: 'Disabled'
     autoPauseDelay: 60
     requestedBackupStorageRedundancy: 'Local'
-    minCapacity: 1
+    // minCapacity: 1 //not alowed for free limit database
     isLedgerOn: false
     useFreeLimit: true
     freeLimitExhaustionBehavior: 'AutoPause'
