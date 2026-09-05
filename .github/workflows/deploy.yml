@@ -95,7 +95,7 @@ jobs:
         with:
           type: deployment
           operation: create
-          scope: resourcegroup
+          scope: resourceGroup
           location: ${{ env.LOCATION }}
           resource-group: rg-infrared
           template-file: ./infra/resources.bicep
