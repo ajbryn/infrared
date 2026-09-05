@@ -9,7 +9,7 @@ permissions:
 
 env:
   APP_NAME: infrared
-  LOCATION: southcentralus
+  LOCATION: centralus
   GHCR_REGISTRY: ghcr.io
 
 jobs:

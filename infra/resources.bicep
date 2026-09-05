@@ -4,7 +4,7 @@ targetScope = 'resourceGroup'
 param appName string
 
 @description('Azure region')
-param location string = 'southcentralus'
+param location string = 'centralus'
 
 @description('GHCR image for the backend container app')
 param backendImage string

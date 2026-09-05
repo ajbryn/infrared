@@ -1,4 +1,4 @@
 using './main.bicep'
 
 param appName = 'myapp'
-param location = 'southcentralus' 
+param location = 'centralus' 

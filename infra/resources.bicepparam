@@ -1,7 +1,7 @@
 using './resources.bicep'
 
 param appName = 'myapp'
-param location = 'southcentralus'
+param location = 'centralus'
 param backendImage = 'ghcr.io/ajbryn/infrared/backend:latest'
 param ghcrRegistry = 'ghcr.io'
 param ghcrUsername = 'ajbryn'

@@ -4,7 +4,7 @@ targetScope = 'subscription'
 param appName string
 
 @description('Azure region')
-param location string = 'southcentralus'
+param location string = 'centralus'
 
 // ─── Resource Group ───
 resource rg 'Microsoft.Resources/resourceGroups@2021-04-01' = {
