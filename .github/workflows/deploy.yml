@@ -96,7 +96,6 @@ jobs:
           type: deployment
           operation: create
           scope: resourceGroup
-          location: ${{ env.LOCATION }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }} 
           resource-group-name: rg-infrared
           template-file: ./infra/resources.bicep
