@@ -136,12 +136,13 @@ resource containerEnv 'Microsoft.App/managedEnvironments@2024-03-01' = {
     appLogsConfiguration: {
       destination: 'log-analytics'
       logAnalyticsConfiguration: {
-        // customerResourceId: logAnalytics.id
-        customerId: logAnalytics.id
+        customerId: logAnalytics.properties.customerId
+        sharedKey: logAnalytics.listKeys().primarySharedKey
       }
     }
   }
 }
+
 
 // ─── Container App (Backend API) ───
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
