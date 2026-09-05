@@ -84,7 +84,7 @@ jobs:
           operation: create
           scope: subscription
           location: ${{ env.LOCATION }}
-          template: ./infra/main.bicep
+          template-file: ./infra/main.bicep
           parameters: |
             appName: ${{ env.APP_NAME }}
             location: ${{ env.LOCATION }}
