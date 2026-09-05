@@ -60,7 +60,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       
-      ## Using MS recommended OIDC instead of stored client secret
       - name: Azure Login
         uses: azure/login@v3
         with:
@@ -113,9 +112,12 @@ jobs:
   deploy-frontend:
     runs-on: ubuntu-latest
     needs: deploy-infra
+    permissions:
+      contents: read
+      id-token: write
     steps:
       - uses: actions/checkout@v4
-
+      
       - name: Azure Login
         uses: azure/login@v3
         with:
