@@ -58,7 +58,7 @@ jobs:
           images: ${{ env.GHCR_REGISTRY }}/${{ github.repository }}/backend
           tags: |
             type=sha,prefix=sha-
-            type=raw,value=latest,enable='${{ github.ref == 'refs/heads/master' }}'
+            type=raw,value=latest,enable=${{ github.ref == 'refs/heads/master' }}
 
       - name: Build and push
         uses: docker/build-push-action@v6
