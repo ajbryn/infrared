@@ -1,5 +1,17 @@
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowFrontendApp", policy =>
+    {
+        policy
+            .WithOrigins("http://localhost:3000", "https://wonderful-wave-0e3756010.3.azurestaticapps.net")
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+    });
+});
+
+
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
@@ -11,6 +23,8 @@ if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
 }
+
+app.UseCors("AllowFrontendApp"); 
 
 app.UseHttpsRedirection();
 
