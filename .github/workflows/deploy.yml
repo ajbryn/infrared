@@ -68,11 +68,13 @@ jobs:
         with:
           node-version: 24
           cache: 'pnpm'
+          cache-dependency-path: 'apps/infrared-web/pnpm-lock.yaml' 
 
       - name: Install and Build Frontend
         run: |
           pnpm install --frozen-lockfile
           pnpm build
+        working-directory: 'apps/infrared-web'
 
       - name: Azure Login
         uses: azure/login@v3
