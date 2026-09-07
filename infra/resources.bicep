@@ -176,6 +176,25 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
         traffic: [
           { latestRevision: true, weight: 100 }
         ]
+        corsPolicy: {
+          allowedOrigins: [
+            'http://localhost:3000'
+            'https://wonderful-wave-0e3756010.3.azurestaticapps.net'
+          ]
+          allowedMethods: [
+            'GET'
+            'POST'
+            'PUT'
+            'DELETE'
+            'OPTIONS'
+          ]
+          allowedHeaders: [
+            '*'
+          ]
+          exposeHeaders: []
+          maxAge: 3600
+          allowCredentials: true
+        }
       }
       activeRevisionsMode: 'Single'
     }
