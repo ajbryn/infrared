@@ -6,6 +6,7 @@ on:
     paths:
       - 'apps/infrared-api/**'
       - 'apps/infrared-web/**'
+  workflow_dispatch: 
 
 permissions:
   contents: read
@@ -34,7 +35,7 @@ jobs:
   deploy-backend:
     name: Deploy backend
     needs: changes
-    if: ${{ needs.changes.outputs.backend == 'true' }}
+    if: ${{ needs.changes.outputs.backend == 'true' || github.event_name == 'workflow_dispatch' }}
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -71,7 +72,7 @@ jobs:
   deploy-frontend:
     name: Deploy frontend
     needs: changes
-    if: ${{ needs.changes.outputs.frontend == 'true' }}
+    if: ${{ needs.changes.outputs.frontend == 'true' || github.event_name == 'workflow_dispatch' }}
     runs-on: ubuntu-latest
     permissions:
       contents: read
