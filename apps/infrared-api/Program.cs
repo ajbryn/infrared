@@ -24,9 +24,9 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
 }
 
-app.UseCors("AllowFrontendApp"); 
-
 app.UseHttpsRedirection();
+app.UseRouting();
+app.UseCors("AllowFrontendApp"); 
 
 var summaries = new[]
 {
