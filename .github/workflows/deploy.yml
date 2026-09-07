@@ -3,7 +3,10 @@ name: Build & Deploy
 on:
   push:
     branches: [master]
-    
+    paths:
+      - 'apps/infrared-api/**'
+      - 'apps/infrared-web/**'
+
 permissions:
   contents: read
 
@@ -12,7 +15,25 @@ env:
   GHCR_REGISTRY: ghcr.io
 
 jobs:
+  changes:
+    runs-on: ubuntu-latest
+    outputs:
+      backend: ${{ steps.filter.outputs.backend }}
+      frontend: ${{ steps.filter.outputs.frontend }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dorny/paths-filter@v3
+        id: filter
+        with:
+          filters: |
+            backend:
+              - 'apps/infrared-api/**'
+            frontend:
+              - 'apps/infrared-web/**'
+
   build-push-backend:
+    needs: changes
+    if: ${{ needs.changes.outputs.backend == 'true' }}
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -36,7 +57,7 @@ jobs:
           images: ${{ env.GHCR_REGISTRY }}/${{ github.repository }}/backend
           tags: |
             type=sha,prefix=sha-
-            type=raw,value=latest,enable={{is_default_branch}}
+            type=raw,value=latest,enable='${{ github.ref == 'refs/heads/master' }}'
 
       - name: Build and push
         uses: docker/build-push-action@v6
@@ -46,11 +67,9 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
 
-      - name: Set image tag output
-        id: version
-        run: echo "version=sha-$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
-
   deploy-frontend:
+    needs: changes
+    if: ${{ needs.changes.outputs.frontend == 'true' }}
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -79,7 +98,6 @@ jobs:
       - name: Azure Login
         uses: azure/login@v3
         with:
-          
           client-id: ${{ secrets.AZURE_CLIENT_ID }}
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
@@ -94,17 +112,6 @@ jobs:
               --resource-group "rg-${{ env.APP_NAME }}" \
               --query "properties.apiKey" -o tsv)
             echo "apikey=$APIKEY" >> $GITHUB_OUTPUT
-
-      # - name: Build and deploy frontend
-      #   uses: Azure/static-web-apps-deploy@v1
-      #   with:
-      #     azure_static_web_apps_api_token: ${{ steps.swa.outputs.apikey }}
-      #     repo_token: ${{ secrets.GITHUB_TOKEN }}
-      #     action: 'upload'
-      #     app_location: '/apps/infrared-web'
-      #     output_location: 'dist'
-      #     app_build_command: 'npm run build'
-      #     skip_api_build: true   
 
       - name: Build and deploy frontend
         uses: Azure/static-web-apps-deploy@v1
