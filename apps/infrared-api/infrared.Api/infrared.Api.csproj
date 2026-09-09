@@ -9,6 +9,13 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.11" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="10.0.11" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\infrared.Providers\infrared.Providers.csproj" />
+    <ProjectReference Include="..\infrared.Data\infrared.Data.csproj" />
+    <ProjectReference Include="..\infrared.Contracts\infrared.Contracts.csproj" />
   </ItemGroup>
 
 </Project>

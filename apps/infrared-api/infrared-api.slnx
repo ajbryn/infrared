@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="infrared.Providers/infrared.Providers.csproj" />
+  <Project Path="infrared.Api/infrared.Api.csproj" />
+  <Project Path="infrared.Data/infrared.Data.csproj" />
+  <Project Path="infrared.Tests/infrared.Tests.csproj" />
+</Solution>
