@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace infrared.Data.Models;
 
@@ -15,5 +14,5 @@ public class Subscription
     [Required]
     public string Timezone { get; set; } = TimeZoneInfo.Utc.Id;
     [Required]
-    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+    public DateTime CreatedOn { get; set; } = DateTime.UtcNow;
 }

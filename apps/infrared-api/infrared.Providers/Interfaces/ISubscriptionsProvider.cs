@@ -1,4 +1,4 @@
-using Contracts.Request;
+using infrared.Contracts.Request;
 using infrared.Data.Models;
 
 public interface ISubscriptionsProvider

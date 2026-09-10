@@ -1,7 +1,8 @@
-using Contracts.Response;
+using infrared.Contracts.Request;
+using infrared.Contracts.Response;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Api.Controllers;
+namespace infrared.Controllers;
 
 [ApiController]
 [Route("[controller]")]
@@ -62,7 +63,7 @@ public class SubscriptionsController : ControllerBase
             CreatedOn = createdSubscription.CreatedOn
         };
 
-        return Created(response);
+        return Ok(response);
     }
 
 }

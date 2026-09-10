@@ -1,4 +1,4 @@
-namespace Contracts.Request;
+namespace infrared.Contracts.Request;
 
 public class SubscriptionRequest
 {

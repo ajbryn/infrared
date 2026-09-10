@@ -1,4 +1,4 @@
-namespace Contracts.Response;
+namespace infrared.Contracts.Response;
 
 public class SubscriptionResponse
 {

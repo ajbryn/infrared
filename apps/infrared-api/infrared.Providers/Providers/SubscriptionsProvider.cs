@@ -1,4 +1,4 @@
-using Contracts.Request;
+using infrared.Contracts.Request;
 using infrared.Data.Models;
 using infrared.Data;
 using Microsoft.EntityFrameworkCore;
